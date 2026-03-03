@@ -1,0 +1,44 @@
+{
+ "filetype": "insert",
+ "cfgdir": "/etc/taos",
+ "host": "localhost",
+ "port": 6030,
+ "user": "root",
+ "password": "taosdata",
+ "thread_count": 16,
+ "thread_count_create": 8,
+ "result_file": "./custom_result.txt",
+ "databases": [
+   {
+     "dbinfo": {
+       "name": "spark",
+       "drop": true,
+       "precision": "ms"
+     },
+     "super_tables": [
+       {
+         "name": "history",
+         "childtable_count": 2000000,
+         "childtable_exists": "no",
+         "childtable_prefix": "s_",
+         "auto_create_table": true,
+         "batch_create_tbl_num": 10,
+         "data_source": "rand",
+         "insert_mode": "stmt",
+         "insert_rows": 2000,
+         "timestamp_step": 1000,
+         "columns": [
+           {"type": "FLOAT", "name": "v", "min": 220.0, "max": 240.0},
+           {"type": "FLOAT", "name": "r", "min": 0.1, "max": 10.0},
+           {"type": "INT", "name": "q", "min": 0, "max": 16},
+           {"type": "TINYINT", "name": "b", "min": 0, "max": 10}
+         ],
+         "tags": [
+           {"type": "VARCHAR", "name": "i", "func": "incr", "len": 32, "prefix": "SN_"},
+           {"type": "TINYINT", "name": "c", "min": 0, "max": 10}
+         ]
+       }
+     ]
+   }
+ ]
+}
